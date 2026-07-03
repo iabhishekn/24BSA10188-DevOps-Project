@@ -1,0 +1,172 @@
+{
+  "annotations": {
+    "list": []
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": null,
+  "links": [],
+  "panels": [
+    {
+      "datasource": {
+        "type": "graphite",
+        "uid": "Graphite"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "percent"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 0
+      },
+      "id": 1,
+      "targets": [
+        {
+          "refId": "A",
+          "target": "alias(scaleToSeconds(nonNegativeDerivative(servers.abc.cpu.total), 1), 'CPU Usage')"
+        }
+      ],
+      "title": "CPU Usage",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "graphite",
+        "uid": "Graphite"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "bytes"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 0
+      },
+      "id": 2,
+      "targets": [
+        {
+          "refId": "A",
+          "target": "alias(servers.abc.memory.used, 'Memory Used')"
+        }
+      ],
+      "title": "Memory Usage",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "graphite",
+        "uid": "Graphite"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "Bps"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 8
+      },
+      "id": 3,
+      "targets": [
+        {
+          "refId": "A",
+          "target": "alias(servers.abc.network.rx, 'Network RX')"
+        },
+        {
+          "refId": "B",
+          "target": "alias(servers.abc.network.tx, 'Network TX')"
+        }
+      ],
+      "title": "Network Usage",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "graphite",
+        "uid": "Graphite"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "max": 1,
+          "min": 0,
+          "unit": "bool_on_off"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 6,
+        "x": 12,
+        "y": 8
+      },
+      "id": 4,
+      "targets": [
+        {
+          "refId": "A",
+          "target": "alias(website.abc.http.available, 'HTTP Available')"
+        }
+      ],
+      "title": "HTTP Availability",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "graphite",
+        "uid": "Graphite"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "s"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 6,
+        "x": 18,
+        "y": 8
+      },
+      "id": 5,
+      "targets": [
+        {
+          "refId": "A",
+          "target": "alias(website.abc.uptime.seconds, 'Uptime')"
+        }
+      ],
+      "title": "Uptime",
+      "type": "stat"
+    }
+  ],
+  "refresh": "10s",
+  "schemaVersion": 39,
+  "tags": [
+    "abc-technologies",
+    "devops-assignment"
+  ],
+  "templating": {
+    "list": []
+  },
+  "time": {
+    "from": "now-1h",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "browser",
+  "title": "ABC Technologies Website Health",
+  "uid": "abc-technologies-health",
+  "version": 1,
+  "weekStart": ""
+}

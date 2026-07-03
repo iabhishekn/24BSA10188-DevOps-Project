@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: abc-technologies-website
+  labels:
+    app: abc-technologies-website
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: abc-technologies-website
+  template:
+    metadata:
+      labels:
+        app: abc-technologies-website
+    spec:
+      containers:
+        - name: website
+          image: abc-technologies/corporate-website:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 80
+              name: http
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 15
+            periodSeconds: 20
+          resources:
+            requests:
+              cpu: 50m
+              memory: 64Mi
+            limits:
+              cpu: 250m
+              memory: 128Mi

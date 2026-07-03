@@ -1,0 +1,31 @@
+services:
+  graphite:
+    image: graphiteapp/graphite-statsd:1.1.10-5
+    container_name: abc-graphite
+    restart: unless-stopped
+    ports:
+      - "8081:80"
+      - "2003:2003"
+      - "8125:8125/udp"
+    volumes:
+      - graphite-data:/opt/graphite/storage
+
+  grafana:
+    image: grafana/grafana:11.1.0
+    container_name: abc-grafana
+    restart: unless-stopped
+    depends_on:
+      - graphite
+    ports:
+      - "3000:3000"
+    environment:
+      GF_SECURITY_ADMIN_USER: admin
+      GF_SECURITY_ADMIN_PASSWORD: admin
+    volumes:
+      - grafana-data:/var/lib/grafana
+      - ./grafana/provisioning:/etc/grafana/provisioning
+      - ./grafana/dashboards:/var/lib/grafana/dashboards
+
+volumes:
+  graphite-data:
+  grafana-data:
